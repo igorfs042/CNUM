@@ -1,38 +1,58 @@
 #!/usr/bin/python
+import os
 import zerosDeFuncoes as zf
-from decimal import Decimal
+import sistemasDeEquacoesLineares as sel
+import interpolacaoPolinomial as ip
 
-#Definindo os intervalos
-intervalo_1 = float(input('Intervalo 1: '))
-intervalo_2 = float(input('Intervalo 2: '))
+def sair():
+    global cond
+    cond = 0
 
-#Menu de opções
-print('0 - Bissecção')
-print('1 - Falsa posição')
-print('2 - Ponto fixo')
-print('3 - Newton-Raphson')
-print('4 - Secante')
+cond = 1
 
-#Estrutura relacionando os métodos com as opções do menu
-switcher = {
-    0: zf.bisseccao,
-    1: zf.falsa_posicao,
-    2: zf.ponto_fixo,
-    3: zf.newton_raphson,
-    4: zf.secante
-}
+while(cond):
+    #Menu de opções
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print('ZEROS DE FUNÇÕES')
+    print('=========================')
+    print('1 - Bissecção')
+    print('2 - Falsa posição')
+    print('3 - Ponto fixo')
+    print('4 - Newton-Raphson')
+    print('5 - Secante\n')
+    print('SISTEMAS DE EQUAÇÕES LINEARES')
+    print('=========================')
+    print('6 - Eliminação de Gauss')
+    print('7 - Fatoração LU')
+    print('8 - Gauss - Jacobi')
+    print('9 - Gauss - Seidel\n')
+    print('INTERPOLAÇÃO POLINOMIAL')
+    print('=========================')
+    print('10 - Lagrange')
+    print('11 - Newton\n')
+    print('=========================')
+    print('0 - Sair do programa\n')
 
-#Seleciona qual método será chamado
-metodo = switcher.get(int(input('Qual o metodo?')), "nothing")
-#Invoca o método escolhido. Independente de qual seja.
-raiz = metodo(intervalo_1, intervalo_2)
+    #Estrutura relacionando os métodos com as opções do menu
+    switcher = {
+        0: sair,
+        1: zf.bisseccao,
+        2: zf.falsa_posicao,
+        3: zf.ponto_fixo,
+        4: zf.newton_raphson,
+        5: zf.secante,
+        6: sel.gauss,
+        7: sel.lu,
+        8: sel.jacobi,
+        9: sel.seidel,
+        10: ip.lagrange,
+        11: ip.newton
+    }
 
-#Resultado
-print('Raíz') 
-print('--------------------------------') 
-print(raiz)
-print()
-print('Iterações')
-print('--------------------------------') 
-print(zf.count)
+    #Seleciona qual método será chamado
+    metodo = switcher.get(int(input('Qual o metodo?')), "nothing")
+    #Invoca o método escolhido. Independente de qual seja.
+    raiz = metodo()
+    input('Pressione ENTER para continuar...')
+
 
