@@ -3,6 +3,8 @@ import os
 import zerosDeFuncoes as zf
 import sistemasDeEquacoesLineares as sel
 import interpolacaoPolinomial as ip
+import minimosQuadrados as mq
+import integraisNumericas as num
 
 def sair():
     global cond
@@ -30,6 +32,15 @@ while(cond):
     print('=========================')
     print('10 - Lagrange')
     print('11 - Newton\n')
+    print('MÍNIMOS QUADRADOS')
+    print('=========================')
+    print('12 - Ajuste Linear')
+    print('13 - Ajuste Logaritmo')
+    print('14 - Ajuste Exponencial')
+    print('15 - Ajuste Potencial\n')
+    print('INTEGRAIS NUMÉRICAS')
+    print('=========================')
+    print('16 - Regra dos Trapézios\n')
     print('=========================')
     print('0 - Sair do programa\n')
 
@@ -46,7 +57,12 @@ while(cond):
         8: sel.jacobi,
         9: sel.seidel,
         10: ip.lagrange,
-        11: ip.newton
+        11: ip.newton,
+        12: mq.linear,
+        13: mq.logaritmo,
+        14: mq.exponencial,
+        15: mq.potencia,
+        16: num.trapezio,
     }
 
     #Seleciona qual método será chamado
@@ -54,5 +70,3 @@ while(cond):
     #Invoca o método escolhido. Independente de qual seja.
     raiz = metodo()
     input('Pressione ENTER para continuar...')
-
-
